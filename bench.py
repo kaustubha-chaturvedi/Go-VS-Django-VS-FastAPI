@@ -23,20 +23,25 @@ def benchmark_post_request(url, iteration, data, label):
     # print(f"{iteration} | POST | {label} | {elapsed_time:.4f} | {response.status_code}")
     return elapsed_time
 
-def run_get_benchmark(url, iterations, label):
-    get_times = [benchmark_get_request(url, i, label) for i in range(1, iterations + 1)]
-    return get_times
+def run_benchmark(url, iterations, label):
+    get_times = []
+    post_times = []
 
-def run_post_benchmark(url, iterations, label):
-    post_times = [benchmark_post_request(url, i, {"name": f"Sample Item {label} {i}"}, label) for i in range(1, iterations + 1)]
-    return post_times
+    for i in range(1, iterations + 1):
+        get_time = benchmark_get_request(url, i, label)
+        post_time = benchmark_post_request(url, i, {"name": f"Sample Item {label} {i}"}, label)
+        
+        get_times.append(get_time)
+        post_times.append(post_time)
+
+    return get_times, post_times
 
 def plot_comparison(labels, get_times_python, get_times_go, post_times_python, post_times_go):
     iterations = list(range(1, len(get_times_python) + 1))
-    get_times_python_ms = [time * 1000 for time in get_times_python]  # Convert to milliseconds
-    get_times_go_ms = [time * 1000 for time in get_times_go]  # Convert to milliseconds
-    post_times_python_ms = [time * 1000 for time in post_times_python]  # Convert to milliseconds
-    post_times_go_ms = [time * 1000 for time in post_times_go]  # Convert to milliseconds
+    get_times_python_ms = [time * 1000 for time in get_times_python]  
+    get_times_go_ms = [time * 1000 for time in get_times_go]  
+    post_times_python_ms = [time * 1000 for time in post_times_python]  
+    post_times_go_ms = [time * 1000 for time in post_times_go]  
 
     plt.figure(figsize=(15, 6))
 
@@ -86,11 +91,8 @@ if __name__ == "__main__":
     url_go = "http://localhost:8080/items"
     labels = ["Python", "Go"]
 
-    get_times_python = run_get_benchmark(url_py, iterations,"Python")
-    get_times_go = run_get_benchmark(url_go, iterations,"Go")
-
-    post_times_python = run_post_benchmark(url_py, iterations, "Python")
-    post_times_go = run_post_benchmark(url_go, iterations, "Go")
+    get_times_python, post_times_python = run_benchmark(url_py, iterations, "Python")
+    get_times_go, post_times_go = run_benchmark(url_go, iterations, "Go")
 
     plot_comparison(labels, get_times_python,get_times_go,post_times_python,post_times_go)
     save_to_csv('benchmark_results.csv', labels, get_times_python, get_times_go, post_times_python, post_times_go)
