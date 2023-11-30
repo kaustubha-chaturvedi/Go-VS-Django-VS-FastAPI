@@ -1,4 +1,4 @@
-# Benchmarking Python's Djnago vs. Go Server Performance
+# Benchmarking  Server Performance Python's Django vs. Go
 
 This project benchmarks the performance of Python's Django and DjangoRestFramework and Go servers for GET and POST requests using the Python `requests` library and measures the response times for each iteration.
 
