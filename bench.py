@@ -11,6 +11,7 @@ def benchmark_get_request(url, iteration, label):
     response.close()
     end_time = time.time()
     elapsed_time = end_time - start_time
+    # print(f"{iteration} | GET | {label} | {elapsed_time:.4f} | {response.status_code}")
     return elapsed_time
 
 
@@ -21,6 +22,7 @@ def benchmark_post_request(url, iteration, data, label):
     response.close()
     end_time = time.time()
     elapsed_time = end_time - start_time
+    # print(f"{iteration} | POST | {label} | {elapsed_time:.4f} | {response.status_code}")
     return elapsed_time
 
 def run_benchmark(urls, iterations, labels):
@@ -107,7 +109,7 @@ def save_to_csv(filename, labels, get_times, post_times):
 if __name__ == "__main__":
     iterations = int(input("Enter number of iterations: "))
     urls = {
-        "Django": "http://localhost:5000/items/",
+        # "Django": "http://localhost:5000/items/",
         "Go": "http://localhost:8080/items",
         "FastAPI": "http://localhost:8000/items",
     }
