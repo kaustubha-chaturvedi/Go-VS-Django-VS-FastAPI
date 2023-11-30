@@ -8,7 +8,7 @@ This project benchmarks the performance of Python's Django and DjangoRestFramewo
 
 1. Clone the repository:
    ```bash
-   [git clone https://github.com/kaustubha-chaturvedi/Go-VS-DjangoRestFramewor.git](https://github.com/kaustubha-chaturvedi/Go-VS-DjangoRestFramework.git)
+   git clone https://github.com/kaustubha-chaturvedi/Go-VS-DjangoRestFramewor.git
 
 2. Install the required Python packages:
     ```bash 
