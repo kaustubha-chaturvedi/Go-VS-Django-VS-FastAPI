@@ -2,9 +2,9 @@
 
 This project benchmarks the performance of Python's Django and DjangoRestFramework and Go servers for GET and POST requests using the Python `requests` library and measures the response times for each iteration.
 
-- Both servers use same production database server running Postgres.
+- All servers use same production database server running Postgres.
 - Each GET and POST Request queries db synchronously. 
-- First Get and then Post Query request is made to test read write operations.
+- First Get and then Post Query requests apr made to test read write operations.
 - Djnago and Go server are synchronous whereas fastapi is an async.
 - Gunicorn was used for django and Uvicron for fastapi whereas Go server is run using go run command.
 
